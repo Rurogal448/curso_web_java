@@ -6,12 +6,14 @@
 package com.viewnext.controladores;
 
 import com.modelo.ServicioUsuarios;
+import com.modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,13 +37,17 @@ public class UsuariosController extends HttpServlet {
             String accion = request.getParameter("accion");
             String nom = request.getParameter("nom");
             String email = request.getParameter("email");
-            String edad = request.getParameter("edad");
+            String edad = request.getParameter("eda");
             String passwd = request.getParameter("passwd");
 
             switch (accion) {
                 case "login":
                     if (ServicioUsuarios.getInstancia().validacionPasswd(email, passwd)) {
                         out.println("<h3> Login correcto </h3>");
+                        HttpSession sesion = request.getSession();
+                        Usuario usu = ServicioUsuarios.getInstancia().obtenerUno(email);
+                        sesion.setAttribute("usuario",usu);
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else {
                         out.println("<h3>Login incorrecto</h3>");
                     }
