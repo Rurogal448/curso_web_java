@@ -11,7 +11,7 @@
                 <tr>
                     <td>Email:</td>
                     <td>
-                        <input type="email" name="email" id="email" size="25" value="correo@gmail.com" required="required"/>
+                        <input type="email" name="email" id="email" size="25" value="email@hotmail.com" required="required"/>
                     </td>
                 </tr>
                 <tr>

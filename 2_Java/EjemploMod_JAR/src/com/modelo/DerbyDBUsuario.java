@@ -30,7 +30,7 @@ public class DerbyDBUsuario {
         }
     }
 
-    public Usuario obtenerUno(String email) throws SQLException {
+    public Usuario obtenerUno(String email) {
         try (Connection con = DriverManager.getConnection(Constantes.CONEX_DB, Constantes.USUARIO_DB, Constantes.PASSWORD_DB)) {
             String consultaSQL = "SELECT id, nombre, edad, email, password" + " FROM Usuario WHERE email='" + email + "'";
             Statement sentencia = con.createStatement();
@@ -38,12 +38,15 @@ public class DerbyDBUsuario {
             Usuario usu = null;
             if (res.next()) {
                 Integer id = res.getInt("id");
-                int nom = res.getInt("nom");
-                Integer edad = res.getInt("edad");
-                Integer password = res.getInt("password");
+                String nom = res.getString("nombre");
+                int edad = res.getInt("edad");
+                String password = res.getString("password");
                 usu = new Usuario(id, nom, edad, email, password);
             }
             return usu;
+        } catch (SQLException ex) {
+            System.err.println(" >>>>>> " + ex.getMessage());
+            return null;
         }
     }
 

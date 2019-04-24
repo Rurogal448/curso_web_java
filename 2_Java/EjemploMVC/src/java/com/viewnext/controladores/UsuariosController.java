@@ -35,6 +35,8 @@ public class UsuariosController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String accion = request.getParameter("accion");
+            
+            String id = request.getParameter("id");
             String nom = request.getParameter("nom");
             String email = request.getParameter("email");
             String edad = request.getParameter("eda");
@@ -43,14 +45,16 @@ public class UsuariosController extends HttpServlet {
             switch (accion) {
                 case "login":
                     if (ServicioUsuarios.getInstancia().validacionPasswd(email, passwd)) {
-                        out.println("<h3> Login correcto </h3>");
                         HttpSession sesion = request.getSession();
                         Usuario usu = ServicioUsuarios.getInstancia().obtenerUno(email);
-                        sesion.setAttribute("usuario",usu);
+                        sesion.setAttribute("usuario", usu);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     } else {
-                        out.println("<h3>Login incorrecto</h3>");
+                        System.out.println("Login incorrecto");
+                        request.getSession().setAttribute("msj_error", "Login incorrecto");
                     }
+                    request.getRequestDispatcher("index.jsp")
+                            .forward(request, response);
                     break;
                 case "registro":
                     boolean realizado = ServicioUsuarios.getInstancia().addUsuario(nom, edad, email, passwd);
@@ -59,6 +63,10 @@ public class UsuariosController extends HttpServlet {
                     } else {
                         out.println("<h3> El usuario no ha sido registrado. </h3>");
                     }
+                    break;
+                case "PUT": // Modificar
+                    ServicioUsuarios.getInstancia().modificar(id, nom, edad, email, passwd);
+                    request.getRequestDispatcher("listar.jsp").forward(request, response);
                     break;
             }
 

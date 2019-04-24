@@ -121,4 +121,8 @@ public class ServicioUsuarios {
     public ArrayList<Usuario> listar() {
         return this.listaUsuarios;
     }
+
+    public void modificarUsuario(String id, String nom, String edad, String email, String passwd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
