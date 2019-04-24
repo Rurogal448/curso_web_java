@@ -1,0 +1,47 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}	
+
+.formulario {
+    display: inline-block;
+	text-align: center;
+	background-color: aquamarine;
+	margin-left: 40%;
+	margin-right: 40%;
+	margin-top: 30px;
+	padding: 10px;
+	font-family: calibri;
+}
+
+.etiqueta, .campo {
+	margin: 5px;
+	width: 200px;
+	display: block;
+}
+
+.boton {
+	margin: 5px;
+	width: 93px;
+}
+
+h1 {
+	font-family: calibri;
+	background-color: blue;
+	margin: 20px;
+	padding: 20px;
+}
+
+.bloque {
+	display: inline-block;
+	width: 12em;
+	height: 5em;
+	background-color: blue;
+	margin: 5px;
+}
+
+	
+
+
+
+	
